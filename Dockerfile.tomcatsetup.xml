@@ -1,0 +1,21 @@
+FROM amazonlinux
+LABEL maintainer="Harinath <harinath@gmail.com>"
+RUN yum install java -y && yum install gzip tar -y 
+WORKDIR /opt/tomcat
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.115/bin/apache-tomcat-9.0.115.tar.gz .
+RUN tar -xvf apache-tomcat-9.0.115.tar.gz && rm -rf apache-tomcat-9.0.115.tar.gz
+
+RUN sed -i '/CookieProcessor/,/HashMap"\/>/d' /opt/tomcat/apache-tomcat-9.0.115/webapps/manager/META-INF/context.xml
+
+WORKDIR /opt/tomcat/apache-tomcat-9.0.115/conf
+
+RUN rm -rf tomcat-users.xml
+
+RUN echo '<?xml version="1.0" encoding="utf-8"?> \
+        <tomcat-users>  \
+        <role rolename="manager-gui"/> \
+        <user username="tomcat" password="tomcat" roles="manager-gui, manager-script, manager-status"/> \
+        </tomcat-users>' > tomcat-users.xml
+
+CMD ["/opt/tomcat/apache-tomcat-9.0.115/bin/catalina.sh" , "run"]
+EXPOSE 8080
