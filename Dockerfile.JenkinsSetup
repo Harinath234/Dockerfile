@@ -1,0 +1,23 @@
+FROM amazonlinux
+LABEL maintainer="Harinath <harinath@gmail.com>"
+
+RUN yum update -y && \
+    yum install java-21-amazon-corretto -y && \
+    yum install git -y && \
+    yum install maven -y && \
+    yum install wget -y
+
+# Add Jenkins repo
+RUN wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/rpm-stable/jenkins.repo
+
+# Import Jenkins key
+RUN rpm --import https://pkg.jenkins.io/rpm-stable/jenkins.io-2026.key
+
+# Install Jenkins
+RUN yum install jenkins -y
+
+WORKDIR /var/lib/jenkins
+
+EXPOSE 8080
+
+CMD ["/usr/bin/jenkins"]

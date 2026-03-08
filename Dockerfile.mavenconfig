@@ -1,0 +1,35 @@
+pipeline {
+
+    agent any
+	
+	tools { 	
+	maven 'Maven_3.9.13'
+		
+	}
+	
+    stages {
+	
+        stage('CLONE SCM') {
+            steps {
+                echo 'This stage clones SC from GIT repo'				
+				git branch: 'main', url: 'https://github.com/Harinath234/mindcircuit16d.git'
+            }
+        }
+		
+        stage('Build Artifact') {
+            steps {
+                echo 'This stage builds the code using maven'
+				sh 'mvn clean install'			
+				
+            }
+        }
+		
+        stage('Deploy to Tomcat') {
+            steps {
+                echo 'This stage deploys .war to tomcat webserver'
+                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat', path: '', url: 'http://98.84.13.167:8082/')], contextPath: 'mindcircuit16d', war: '**/*.war'
+            }
+        }		
+		
+    }
+}
