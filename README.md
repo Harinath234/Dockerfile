@@ -1,4 +1,7 @@
 # Dockerfile
+
+🚀 This Docker image contains the containerized application built using Docker and deployed through CI/CD.
+
 ## Docker Image
 
 [![Docker Hub](https://img.shields.io/badge/DockerHub-Repository-blue)](https://hub.docker.com/r/harinath93811/dockerized-app)
