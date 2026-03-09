@@ -1,0 +1,10 @@
+FROM ubuntu AS buildstage
+RUN apt-get update && apt-get install -y golang-go 
+ENV GO111MODULE=off 
+WORKDIR /opt/calculatorapp
+COPY . . 
+RUN go build calculator.go 
+
+FROM scratch
+COPY --from=buildstage  /opt/calculatorapp/calculator /opt/calculatorapp/calculator
+ENTRYPOINT ["/opt/calculatorapp/calculator"] 

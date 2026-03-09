@@ -1,0 +1,6 @@
+STEPS: to build artifact
+ 
+yum update  
+yum install -y go 
+GO111MODULE=off 
+go build calculator.go 
