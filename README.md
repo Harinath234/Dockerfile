@@ -16,5 +16,12 @@ https://hub.docker.com/r/harinath93811/dockerized-app
 Available Tags:
 https://hub.docker.com/r/harinath93811/dockerized-app/tags
 
-Pull Image:
+## Run the Application using Docker
+
+Pull the image:
+
 docker pull harinath93811/dockerized-app:Sample_MultiStage_App
+
+Run the container:
+
+docker run -itd -p 8080:8080 harinath93811/dockerized-app:Sample_MultiStage_App
