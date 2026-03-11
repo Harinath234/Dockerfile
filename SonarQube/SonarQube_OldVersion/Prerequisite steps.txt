@@ -1,0 +1,16 @@
+#Install Docker
+##Create Project Directory
+mkdir sonarqube-docker
+cd sonarqube-docker
+
+##Download SonarQube Manually
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.6.0.92116.zip
+
+##Extract:
+sudo apt update
+sudo apt install -y unzip
+
+unzip sonarqube-10.6.0.92116.zip
+mv sonarqube-10.6.0.92116 sonarqube
+
+vi Dockerfile
