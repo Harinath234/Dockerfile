@@ -1,5 +1,5 @@
 FROM amazonlinux:2023
-RUN yum update -y && \ yum install -y java-21-amazon-corretto wget unzip shadow-utils && \ yum clean all
+RUN yum update -y && \ yum install -y java-21-amazon-corretto wget unzip shadow-utils procps && \ yum clean all
 RUN useradd -m sonar
 WORKDIR /opt
 COPY sonarqube /opt/sonarqube
