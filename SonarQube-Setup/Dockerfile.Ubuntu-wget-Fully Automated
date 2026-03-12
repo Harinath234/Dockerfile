@@ -1,1 +1,30 @@
+FROM ubuntu:22.04
 
+# Install Java and required tools
+RUN apt update && \
+    apt install -y openjdk-21-jdk wget unzip && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create sonar user
+RUN useradd -m sonar
+
+# Working directory
+WORKDIR /opt
+
+# Download SonarQube
+RUN wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-26.1.0.118079.zip && \
+    unzip sonarqube-26.1.0.118079.zip && \
+    mv sonarqube-26.1.0.118079 sonarqube && \
+    rm -f sonarqube-26.1.0.118079.zip
+
+# Set permissions
+RUN chown -R sonar:sonar /opt/sonarqube
+
+# Run as non-root
+USER sonar
+
+# Expose port
+EXPOSE 9000
+
+# Start SonarQube
+ENTRYPOINT ["/opt/sonarqube/bin/linux-x86-64/sonar.sh","console"]
