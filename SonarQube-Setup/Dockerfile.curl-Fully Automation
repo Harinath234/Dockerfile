@@ -1,1 +1,23 @@
+FROM amazonlinux:2023
 
+RUN yum update -y && \
+    yum install -y java-21-amazon-corretto curl-minimal unzip shadow-utils procps && \
+    yum clean all
+
+RUN useradd -m sonar
+
+WORKDIR /opt
+
+# Download SonarQube using curl
+RUN curl -L -o sonarqube.zip https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-26.1.0.118079.zip && \
+    unzip sonarqube.zip && \
+    mv sonarqube-26.1.0.118079 sonarqube && \
+    rm -f sonarqube.zip
+
+RUN chown -R sonar:sonar /opt/sonarqube
+
+USER sonar
+
+EXPOSE 9000
+
+ENTRYPOINT ["/opt/sonarqube/bin/linux-x86-64/sonar.sh","console"]
