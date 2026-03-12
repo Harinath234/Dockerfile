@@ -53,6 +53,14 @@ http://localhost:9000
 
 ---
 
+## Screenshots
+
+![SonarQube Setup](screenshots/sonarqube-setup.png)
+
+![SonarQube Scan](screenshots/sonarqube-scan.png)
+
+---
+
 ## Pull Image and Run Container
 
 ### Pull Docker Image
