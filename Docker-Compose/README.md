@@ -10,3 +10,9 @@ docker-compose version
 
 docker-compose up -d 
   docker-compose down --volumes 
+
+## Screenshots
+
+### Docker Compose Application Output
+
+![Docker Compose Output](screenshots/12Video-B16-Docker-Compose-7-Oct-25-2.png)
