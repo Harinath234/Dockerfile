@@ -13,6 +13,12 @@ docker-compose up -d
 
 ## Screenshots
 
+## Project Output
+
+After running docker-compose, the application runs successfully in the browser.
+
+![Docker Compose Up](screenshots/docker-compose-up.png)
+
 ### Docker Compose Application Output
 
 ![Docker Compose Output](screenshots/docker-compose-output.png)
